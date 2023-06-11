@@ -6,7 +6,7 @@ const Room = () => {
   const [rooms, setRooms] = useState([]);
 
   const createRoom = (name: string) => {
-    fetch("/api/rooms", {
+    fetch("http://localhost:8080/rooms", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ const Room = () => {
 
   // fetch all rooms from server
   useEffect(() => {
-    fetch("/api/rooms")
+    fetch("http://localhost:8080/rooms")
       .then((res) => res.json())
       .then((rooms) => {
         setRooms(rooms);
@@ -29,10 +29,10 @@ const Room = () => {
   }, []);
 
   return (
-    <>
+    <div>
       {rooms.map((room) => (
         <div key={room.id}>
-          <a href={`/room/${room.id}`}>{room.name}</a>
+          <a href={`/room/${room.id}`}>{room.roomCode}</a>
         </div>
       ))}
       <div>
@@ -52,7 +52,7 @@ const Room = () => {
         <input type="text" placeholder="Room name" />
         <button type="submit">Create Room</button>
       </form>
-    </>
+    </div>
   );
 };
 
